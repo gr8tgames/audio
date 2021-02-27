@@ -32,7 +32,7 @@ namespace Gr8tGames.Audio
         PreviewAudio.clip = sound.Clip;
         PreviewAudio.volume = sound.Volume;
         PreviewAudio.pitch = sound.Pitch;
-        PreviewAudio.loop = false;
+        PreviewAudio.loop = sound.IsLoop;
         PreviewAudio.Play();
       }
     }

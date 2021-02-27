@@ -1,19 +1,10 @@
 {
   "dependencies": {
     "com.gr8tgames.audio": {
-      "version": "file:SoundHandler",
+      "version": "file:Gr8tGames.Audio",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {
-        "com.guciodevs.simple-min-max-slider": "https://github.com/GucioDevs/SimpleMinMaxSlider.git#upm"
-      }
-    },
-    "com.guciodevs.simple-min-max-slider": {
-      "version": "https://github.com/GucioDevs/SimpleMinMaxSlider.git#upm",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "46ff35d22982657d55f7861ddc01b115a2db1554"
+      "dependencies": {}
     },
     "com.unity.2d.animation": {
       "version": "5.0.3",

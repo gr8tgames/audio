@@ -8,7 +8,7 @@ namespace Gr8tGames.Audio
   {
     private const float InactiveSoundCheckPeriod = 1.0f;
 
-    public void Play(SoundDefinition sound, Vector3? position = null)
+    public AudioSource Play(SoundDefinition sound, Vector3? position = null)
     {
       var pos = position ?? Vector3.zero;
       var soundGameObject = GetSoundFromPool();
@@ -23,6 +23,13 @@ namespace Gr8tGames.Audio
       audio.outputAudioMixerGroup = sound.Output;
       audio.Play();
       Invoke(nameof(ReturnInactiveSoundsToPool), InactiveSoundCheckPeriod);
+      return audio;
+    }
+
+    public void Stop(AudioSource audio)
+    {
+      audio.Stop();
+      audio.gameObject.SetActive(false);
     }
 
     private List<GameObject> SoundPool;
@@ -47,8 +54,10 @@ namespace Gr8tGames.Audio
     {
       SoundPool.ForEach(sound =>
       {
-        var soundComponent = sound.GetComponent<AudioSource>();
-        sound.SetActive(soundComponent.isPlaying);
+        var audio = sound.GetComponent<AudioSource>();
+        var isPlaying = audio.isPlaying;
+        if (isPlaying) Invoke(nameof(ReturnInactiveSoundsToPool), InactiveSoundCheckPeriod);
+        sound.SetActive(isPlaying);
       });
     }
   }
