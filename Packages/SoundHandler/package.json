@@ -1,0 +1,16 @@
+{
+  "name": "com.gr8tgames.audio",
+  "version": "1.0.0",
+  "displayName": "Gr8tGames Audio",
+  "description": "Simple sound handler and sound asset creation",
+  "unity": "2019.4",
+  "dependencies": {
+    "com.guciodevs.simple-min-max-slider": "https://github.com/GucioDevs/SimpleMinMaxSlider.git#upm"
+  },
+  "author": {
+    "name": "Gr8tGames",
+    "email": "core@gr8t.games",
+    "url": "https://gr8t.games"
+  },
+  "type": "library"
+}S
