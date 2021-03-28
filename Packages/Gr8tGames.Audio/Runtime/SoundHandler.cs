@@ -6,59 +6,57 @@ namespace Gr8tGames.Audio
 {
   public class SoundHandler : MonoBehaviour
   {
-    private const float InactiveSoundCheckPeriod = 1.0f;
+    private GameObject SoundPrefab;
+    private GameObject SoundParent;
+    private List<AudioSource> SoundPool;
+
+    private void Awake()
+    {
+      SoundPrefab = new GameObject("SoundPrefab", typeof(AudioSource));
+      SoundPrefab.hideFlags = HideFlags.HideAndDontSave;
+      SoundParent = new GameObject("Sound");
+      SoundParent.transform.SetParent(gameObject.transform);
+      SoundPool = new List<AudioSource>();
+    }
 
     public AudioSource Play(SoundDefinition sound, Vector3? position = null)
     {
       var pos = position ?? Vector3.zero;
-      var soundGameObject = GetSoundFromPool();
-      soundGameObject.SetActive(true);
+      var audio = GetSoundFromPool();
+      var soundGameObject = audio.gameObject;
       soundGameObject.transform.SetPositionAndRotation(pos, Quaternion.identity);
-      var audio = soundGameObject.GetComponent<AudioSource>();
-      audio.clip = sound.Clip;
-      audio.volume = sound.Volume;
+      soundGameObject.name = sound.Clip.name;
       audio.pitch = sound.Pitch;
       audio.loop = sound.IsLoop;
       audio.spatialBlend = sound.SpatialBend;
       audio.outputAudioMixerGroup = sound.Output;
-      audio.Play();
-      Invoke(nameof(ReturnInactiveSoundsToPool), InactiveSoundCheckPeriod);
+      if(sound.IsLoop)
+      {
+        audio.clip = sound.Clip;
+        audio.volume = sound.Volume;
+        audio.Play();
+      }
+      else
+      {
+        audio.PlayOneShot(sound.Clip, sound.Volume);
+      }
       return audio;
     }
 
     public void Stop(AudioSource audio)
     {
       audio.Stop();
-      audio.gameObject.SetActive(false);
     }
 
-    private List<GameObject> SoundPool;
-
-    private void Awake()
+    private AudioSource GetSoundFromPool()
     {
-      SoundPool = new List<GameObject>();
-    }
-
-    private GameObject GetSoundFromPool()
-    {
-      var inactiveSound = SoundPool.FirstOrDefault(s => !s.activeInHierarchy);
+      var inactiveSound = SoundPool.FirstOrDefault(s => !s.isPlaying);
       if (inactiveSound != default) return inactiveSound;
 
-      var sound = new GameObject("Sound");
-      sound.AddComponent<AudioSource>();
-      SoundPool.Add(sound);
-      return sound;
-    }
-
-    private void ReturnInactiveSoundsToPool()
-    {
-      SoundPool.ForEach(sound =>
-      {
-        var audio = sound.GetComponent<AudioSource>();
-        var isPlaying = audio.isPlaying;
-        if (isPlaying) Invoke(nameof(ReturnInactiveSoundsToPool), InactiveSoundCheckPeriod);
-        sound.SetActive(isPlaying);
-      });
+      var newSound = Instantiate(SoundPrefab, SoundParent.transform);
+      var audio = newSound.GetComponent<AudioSource>();
+      SoundPool.Add(audio);
+      return audio;
     }
   }
 }

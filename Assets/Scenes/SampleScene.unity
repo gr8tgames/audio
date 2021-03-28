@@ -255,6 +255,7 @@ MonoBehaviour:
   VisualRepresentation: {fileID: 5275923264640380909, guid: b1d45c39b63eb4b45b3505020a47beff, type: 3}
   MinSpawnTime: 0.1
   MaxSpawnTime: 0.5
+  ChanceToSpawnMultiple: 0
   MinPosition: {x: -10, y: -10}
   MaxPosition: {x: 5, y: 5}
 --- !u!114 &1175300266

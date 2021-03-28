@@ -16,8 +16,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
   - {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
   - {fileID: 8300000, guid: 881e3f52c86c94f26a60718d35627cd8, type: 3}
+  - {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
+  - {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  - {fileID: 8300000, guid: 79e6baad2fd414b82a6d49ce1568d2e5, type: 3}
   Output: {fileID: 5283948129750541586, guid: bbd7cc212b8f60a47a0b4dd7f4e8a158, type: 2}
-  VolumeRange: {x: 0.5087651, y: 1}
-  PitchRange: {x: 0.9134432, y: 1.2534432}
+  VolumeRange: {x: 0.17335272, y: 1}
+  PitchRange: {x: 0.5, y: 2}
   SpatialBend: 1
   IsLoop: 0

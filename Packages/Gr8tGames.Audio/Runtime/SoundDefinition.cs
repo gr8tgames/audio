@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Audio;
-using GD.MinMaxSlider;
 
 namespace Gr8tGames.Audio
 {
@@ -10,10 +9,10 @@ namespace Gr8tGames.Audio
     public AudioClip[] Clips;
     public AudioMixerGroup Output;
     
-    [MinMaxSlider(0, 1f)]
+    [MinMaxAudioSetting(0, 1f)]
     public Vector2 VolumeRange = new Vector2(1f, 1f);
     
-    [MinMaxSlider(0.05f, 2f)]
+    [MinMaxAudioSetting(0.05f, 2f)]
     public Vector2 PitchRange = new Vector2(1f, 1f);
 
     [Range(0, 1.0f)]
